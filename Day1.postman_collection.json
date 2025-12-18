@@ -1,0 +1,376 @@
+{
+	"info": {
+		"_postman_id": "ab9456e3-d3ff-4b8a-8a84-55c041cec234",
+		"name": "Day1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47655557",
+		"_collection_link": "https://vedantirb-2357401.postman.co/workspace/CES-IT_Training~82ec23bf-fafc-4198-a345-e1c76388723f/collection/47655557-ab9456e3-d3ff-4b8a-8a84-55c041cec234?action=share&source=collection_link&creator=47655557"
+	},
+	"item": [
+		{
+			"name": "AllObjs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const respText = pm.response.text();\r",
+							"pm.test(\"text log expression\", function()\r",
+							"{\r",
+							"    let regx = /Apple iPad Mini 5th Gen/i;\r",
+							"    pm.expect(regx.test(respText)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check na red\", function()\r",
+							"{   let i = -1;\r",
+							"    pm.expect(Array.isArray(jsonData)).to.be.true;\r",
+							"    jsonData.forEach((item, index)=>{\r",
+							"        pm.expect(item).to.have.property(\"data\");\r",
+							"          if(item.data && item.data.color &&  item.data.color==\"Red\")\r",
+							"        {\r",
+							"            i = index;\r",
+							"            //break;\r",
+							"        }    \r",
+							"    console.log(item.data);\r",
+							"        //console.log(item);\r",
+							"    });\r",
+							"    pm.expect(jsonData[i].data.color).eql(\"Red\");\r",
+							"    //pm.expect(jsonData.color).to.eql(\"Red\");\r",
+							"//pm.expect(item.name).to.eql(\"Apple iPad Mini 5th Gen\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"const id = jsonData.findIndex(item => {\r",
+							"    return item.data && item.data.color && item.data.color.trim().toLowerCase() == \"red\";\r",
+							"});\r",
+							"\r",
+							"console.log(id);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/objects",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllWithScript",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Name property should be equal to 'Apple with seris 8'\", function()\r",
+							"{\r",
+							"  \r",
+							"        pm.expect(jsonData.name).equal(\"Apple Watch Series 8\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check id\", function()\r",
+							"{\r",
+							"\r",
+							"    // const response = pm.response.json();\r",
+							"    pm.expect(jsonData.id).equal(\"8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"check header content\", function()\r",
+							"{\r",
+							" const present = pm.response.headers.get(\"Content-Type\");\r",
+							" console.log(present);\r",
+							" \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check cookies\", function () {\r",
+							"    //pm.expect(pm.cookies.count()).equal.to(0);\r",
+							"    const cookies = pm.cookies.toObject();\r",
+							"    console.log(cookies);\r",
+							"    pm.expect(pm.cookies.has(\"sessionId\")).to.be.false;\r",
+							"    //pm.expect(cookies).to.have.property(\"sessionId\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/objects/8",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"objects",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MultipleID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.restful-api.dev/objects?id=3&id=5&id=10",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						},
+						{
+							"key": "id",
+							"value": "5"
+						},
+						{
+							"key": "id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SingleID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.restful-api.dev/objects/7",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SingleIDwithScript",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.restful-api.dev/objects/34356",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects",
+						"34356"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddObject",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.restful-api.dev/objects",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BasicAuth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "postman",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://postman-echo.com/basic-auth",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"basic-auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "simpleCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"address\": \"Thanisandra\",\r\n    \"item\": {\r\n        \"itemId\": \"101\",\r\n        \"name\": \"Onion\",\r\n        \"price\": \"45\",\r\n        \"description\": \"Organic\"\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.simplekart.com/orders",
+					"protocol": "https",
+					"host": [
+						"api",
+						"simplekart",
+						"com"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.simplekart.com/orders?list=10",
+					"protocol": "https",
+					"host": [
+						"api",
+						"simplekart",
+						"com"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "list",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
