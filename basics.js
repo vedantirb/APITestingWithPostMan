@@ -122,5 +122,15 @@ function sorting()
 
 sorting();
 
+
+function sortingDescending()
+{
+  const num = [1,2,11,33,3,98,89];
+  num.sort();
+  num.sort(function(a,b){
+    return b-a;
+  });
+  console.log(num);
+}
 // practice map reduce slice
 
