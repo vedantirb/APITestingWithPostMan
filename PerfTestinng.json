@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "990f3341-5fdd-44bc-ab28-93f9beeba522",
+		"name": "PerformanceTesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47655557",
+		"_collection_link": "https://vedantirb-2357401.postman.co/workspace/CES-IT_Training~82ec23bf-fafc-4198-a345-e1c76388723f/collection/47655557-990f3341-5fdd-44bc-ab28-93f9beeba522?action=share&source=collection_link&creator=47655557"
+	},
+	"item": [
+		{
+			"name": "getAllOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item\": \"iPhone Pro 17\",\r\n    \"price\": 4000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "batchAddOrder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try {\r",
+							"    const response = await pm.execution.runRequest(\"47655557-44d618f7-34ea-4438-a8c8-70199c67bc70\");\r",
+							"\r",
+							"    console.log(response.json());\r",
+							"} catch (err) {\r",
+							"    console.error(err);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {
+							"47655557-44d618f7-34ea-4438-a8c8-70199c67bc70": {
+								"workspace": "82ec23bf-fafc-4198-a345-e1c76388723f",
+								"location": [
+									"PerformanceTesting",
+									"AddOrder"
+								]
+							}
+						}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item\": \"iPhone Pro 17\",\r\n    \"price\": 4000\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "batchReqData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item\": \"iPhone Pro 17\",\r\n    \"price\": 4000\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

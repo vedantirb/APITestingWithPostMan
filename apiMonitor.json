@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "e3335fe2-b09a-4204-b8b3-2e1a202397d9",
+		"name": "monitor-dashboard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47655557",
+		"_collection_link": "https://vedantirb-2357401.postman.co/workspace/CES-IT_Training~82ec23bf-fafc-4198-a345-e1c76388723f/collection/47655557-e3335fe2-b09a-4204-b8b3-2e1a202397d9?action=share&source=collection_link&creator=47655557"
+	},
+	"item": [
+		{
+			"name": "getObj",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Apple MacBook Pro 1999\",\r\n    \"data\": {\r\n        \"year\": 2019,\r\n        \"price\": 1849.99,\r\n        \"CPU model\": \"Intel Core i9\",\r\n        \"Hard disk size\": \"1 TB\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.restful-api.dev/objects",
+					"protocol": "https",
+					"host": [
+						"api",
+						"restful-api",
+						"dev"
+					],
+					"path": [
+						"objects"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
