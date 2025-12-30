@@ -1,0 +1,50 @@
+* Steps to run postman collection  -
+    install git client
+    install nodejs
+    open new Git bash CLI
+    npm i –g newman (install new man)
+    script_folder> newman run <script_file_name json collection file>
+
+* command to run collection
+    newman run Day1.postman_collection.json --env-var "baseURL=https://api.restful-api.dev"
+
+* to export result in html install html reporter
+    npm install newman-reporter-html -g
+
+* command to export collection result to html
+    newman run Day1.postman_collection.json --env-var "baseURL=https://api.restful-api.dev" --reporters html
+
+* command to pass json input data file to collection request
+    newman run Day1.postman_collection.json --folder AddObject --env-var "baseURL=https://api.restful-api.dev" --reporters html -d inputData.json
+
+
+** Links to refer
+>> postman api template for ref (
+    https://restful-api.dev/
+    https://learning.postman.com/docs/developer/echo-api/
+    https://postman-echo.com/basic-auth
+    https://www.postman.com/postman/published-postman-templates/request/dbxpwo3/post-order-details-to-the-database
+    https://www.postman.com/postman/published-postman-templates/documentation/ae2ja6x/postman-echo
+
+    )
+>> github ref (https://github.com/tcspariwesh/postman-training)
+
+>> Postman flow api - (https://www.postman.com/templates/flows/?utm_source=microsite&utm_medium=microsite&utm_campaign=templates_linking_25&utm_term=templates&utm_content=cta-templates
+    https://www.postman.com/postman/flows-spotlight-apis-and-templates/flow/67620184a29c8d003d3e920e/?authFlowId=0aa22f0a-158e-4bb4-be3f-bdbde303d685
+    https://learning.postman.com/docs/postman-flows/tutorials/beginner/create-count-based-loop/#add-a-repeat-block
+    https://learning.postman.com/docs/postman-flows/tutorials/advanced/send-information-from-one-system-to-another/
+ )
+ >> Soap API practice (https://www.crcind.com/csp/samples/SOAP.Demo.cls)
+ >> newman command ref (https://learning.postman.com/docs/collections/using-newman-cli/newman-options/)
+
+
+## Performance testing
+>>npm i -g json-server (installing json server)
+>> create server.json in project d
+>>json-server server.json (run the server)
+>>we can add datato server.json using postman or jMeter by adding httpRequest
+
+### performance testing using jMeter
+>> install JMeter Apache
+>> command to run jmeter file using bash command
+>>jmeter -n -l result.jtl -o report -e -t JMeterRequests.jmx
