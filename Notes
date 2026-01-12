@@ -5,7 +5,7 @@
     npm i –g newman (install new man)
     script_folder> newman run <script_file_name json collection file>
 
-* command to run collection
+* command to run postman collection
     newman run Day1.postman_collection.json --env-var "baseURL=https://api.restful-api.dev"
 
 * to export result in html install html reporter
@@ -28,6 +28,7 @@
 
     )
 >> github ref (https://github.com/tcspariwesh/postman-training)
+>> https://dummyjson.com/docs/ (example API)
 
 >> Postman flow api - (https://www.postman.com/templates/flows/?utm_source=microsite&utm_medium=microsite&utm_campaign=templates_linking_25&utm_term=templates&utm_content=cta-templates
     https://www.postman.com/postman/flows-spotlight-apis-and-templates/flow/67620184a29c8d003d3e920e/?authFlowId=0aa22f0a-158e-4bb4-be3f-bdbde303d685
@@ -37,14 +38,96 @@
  >> Soap API practice (https://www.crcind.com/csp/samples/SOAP.Demo.cls)
  >> newman command ref (https://learning.postman.com/docs/collections/using-newman-cli/newman-options/)
 
+## wget (used to send an HTTP POST/GET/.. request with a JSON body to an API endpoint.
+>> below example is being used to create (POST) an object on the server.
 
-## Performance testing
+wget \
+  --method POST \
+  --timeout=0 \
+  --header 'Content-Type: application/json' \
+  --body-data '{
+    "name": "Apple MacBook Pro 1999",
+    "data": {
+        "year": 2019,
+        "price": 1849.99,
+        "CPU model": "Intel Core i9",
+        "Hard disk size": "1 TB"
+    }
+}' \
+   'https://api.restful-api.dev/objects'
+
+(can also pass json file in body-data)
+wget --method POST \
+  --timeout=30 \
+  --header "Content-Type: application/json" \
+  --body-data @"C:\testdata\payload.json" \
+  https://api.restful-api.dev/objects
+
+## Performance testing using json-server
+>>json-server lets you simulate a backend API quickly for development, testing, or automation without writing server code.
 >>npm i -g json-server (installing json server)
 >> create server.json in project d
 >>json-server server.json (run the server)
->>we can add datato server.json using postman or jMeter by adding httpRequest
+>>we can add data to server.json using postman or jMeter by adding httpRequest
 
-### performance testing using jMeter
+### performance testing  using jMeter
 >> install JMeter Apache
 >> command to run jmeter file using bash command
 >>jmeter -n -l result.jtl -o report -e -t JMeterRequests.jmx
+>>with json data
+>>jmeter -n -l result.jtl -o report -e -t jMeterHttpReqDay2.jmx -JdataFile=jMeterReqCSV.csv -Jthreads=$lines
+
+
+## jenkins server http://localhost:8080 (user:admin password:admin)
+C:\Users\91992\AppData\Roaming\npm\newman.cmd run Day2.postman_collection.json --env-var "baseURL=https://api.restful-api.dev"
+##microservices
+>>any service should be reliable, efficient, scalable, performance
+>>https://github.com/tcspariwesh/chubb-spring-project/blob/main/Final-Projects/SOFTWARE%20DESIGN%20DOCUMENT.docx
+>> kafka message broker service
+>>kubernet will manage load balance (will create nodes auto and release node auto , its support
+auto scalable)
+
+>>message server (rabbitMq, activeMQ)
+
+>> download activeMQ (5.17.6)
+>> run C:\Users\91992\Downloads\testing\apache-activemq-5.17.6\bin\win64\activemq.bat
+>>http://localhost:8161/
+>>run jMeter and create JMS Publisher >> with JMS Publisher config with initial context factory as
+>>org.apache.activemq.jndi.ActiveMQInitialContextFactory, url to tcp://localhost:61616 then connectionFactory to ConnetionFactory, and destination to dynamicQueues/orders
+
+   // const pattern6 = /^\{"id":\d+,"products":\[\{"id":\d+,"title":"[\w\s\S]+\","price":\d+.\d+,"quantity":\d+/;
+>>//    const pattern6 = /^\{"id":\d+,"products":\[\{"id":\d+,"title":/;
+
+
+Code 	Description
+x+ 	Matches at least one x
+x* 	Matches zero or more occurrences of x
+x? 	Matches zero or one occurrences of x
+x{n} 	Matches n occurences of x
+x{n,m} 	Matches from n to m occurences of x
+x{n,} 	Matches n or more occurences of x
+
+a|b 	Matches a or b
+. 	Matches any (wildcard) character except line terminators
+\w 	Matches word characters (alphanumeric and _)
+\W 	Matches non-word characters
+\d 	Matches digits (0-9)
+\D 	Matches non-digit characters
+\s 	Matches whitespace characters (space, tab, newline)
+\S 	Matches non-whitespace character
+
+const json = pm.response.json();
+pm.expect(json.total).to.be.a("number");
+pm.expect(json.total).to.be.greaterThan(0);
+
+#email pattern
+>> added [\w-] to include - also part of email in domain becz \w only contain [A-Za-z0-9_]
+const pattern9 = /"thumbnail"\s*:\s*"https:\/\/[\w-]+\.[\w-]+\.(com|in)/;
+
+/g   => Global flag → ensures that all matches in the string are found, not just the first
+
+///Swagger https://petstore.swagger.io/
+//https://petstore.swagger.io/v2/swagger.json
+
+
+
